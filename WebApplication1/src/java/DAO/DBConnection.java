@@ -13,10 +13,10 @@ import java.sql.SQLException;
  * @author ADMIN
  */
 public class DBConnection {
-     
+
     public static Connection getConnection() {
-    Connection con = null ;
-    
+        Connection con = null;
+
         try {
             // Edit URL , username, password to authenticate with your MS SQL Server
             String url = "jdbc:sqlserver://localhost:1433;databaseName=School";
@@ -30,12 +30,13 @@ public class DBConnection {
         }
         return null;
     }
+
     public static void main(String[] args) {
-        try(Connection con = DBConnection.getConnection();) {
+        try (Connection con = DBConnection.getConnection();) {
             System.out.println("Success");
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
+
 }

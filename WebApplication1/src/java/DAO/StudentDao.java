@@ -79,7 +79,6 @@ public class StudentDao {
                 while (rs.next()) {
                     Student st = new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                     listStudent.add(st);
-
                 }
                 return listStudent;
             }
@@ -88,7 +87,6 @@ public class StudentDao {
         return null;
     }
 
-    
     public static void updateStudent(Student student) {
         String checkExistence = "SELECT * FROM [dbo].[Student] WHERE Id=?";
         String update = "UPDATE [dbo].[Student]\n"
@@ -100,15 +98,15 @@ public class StudentDao {
             stmt = con.prepareStatement(checkExistence);
             stmt.setInt(1, student.getId());
             rs = stmt.executeQuery();
-            if(rs.next()){ 
-            stmt = con.prepareStatement(update);
-            stmt.setString(1, student.getName());
-            stmt.setString(2, student.getGender().substring(0,1));
-            stmt.setDate(3, convertStringToSqlDate(student.getDob()));
-            stmt.setInt(4, student.getId());
-            stmt.executeUpdate();
-            }else{
-                System.out.println("Don't exist id = "+student.getId());
+            if (rs.next()) {
+                stmt = con.prepareStatement(update);
+                stmt.setString(1, student.getName());
+                stmt.setString(2, student.getGender().substring(0, 1));
+                stmt.setDate(3, convertStringToSqlDate(student.getDob()));
+                stmt.setInt(4, student.getId());
+                stmt.executeUpdate();
+            } else {
+                System.out.println("Don't exist id = " + student.getId());
             }
         } catch (Exception e) {
         }
@@ -127,5 +125,4 @@ public class StudentDao {
 
     }
 
-   
 }
